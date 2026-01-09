@@ -1,0 +1,6 @@
+{
+    "checkout": {
+        "phoneNumberRequiredForShippingMethod": "Eine Telefonnummer ist für die ausgewählte Versandart erforderlich.",
+        "addressSaveChange": "Telefonnummer speichern"
+    }
+}

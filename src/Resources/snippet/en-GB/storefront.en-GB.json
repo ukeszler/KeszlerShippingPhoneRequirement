@@ -1,0 +1,6 @@
+{
+    "checkout": {
+        "phoneNumberRequiredForShippingMethod": "A phone number is required for the selected shipping method.",
+        "addressSaveChange": "Save phone number"
+    }
+}

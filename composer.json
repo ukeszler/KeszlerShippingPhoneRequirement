@@ -1,0 +1,26 @@
+{
+    "name": "keszler-shipping-phone-requirement/keszler-shipping-phone-requirement",
+    "description": "Require phone number for selected shipping methods",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "KeszlerShippingPhoneRequirement\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "KeszlerShippingPhoneRequirement\\KeszlerShippingPhoneRequirement",
+        "label": {
+            "de-DE": "Telefonnummer-Pflicht nach Versandart",
+            "en-GB": "Phone number requirement by shipping method"
+        },
+        "description": {
+            "de-DE": "Erzwingt eine Telefonnummer nur fur konfigurierte Versandarten in der Registrierung und im Checkout.",
+            "en-GB": "Requires a phone number only for configured shipping methods during registration and checkout."
+        }
+    },
+    "require": {
+        "shopware/core": ">=6.7.5"
+    }
+}

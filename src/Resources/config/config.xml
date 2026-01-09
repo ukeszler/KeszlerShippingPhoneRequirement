@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Phone number requirement</title>
+        <title lang="de-DE">Telefonnummer-Pflicht</title>
+
+        <component name="sw-entity-multi-id-select">
+            <name>shippingMethodsRequiringPhoneNumber</name>
+            <label>Shipping methods requiring a phone number</label>
+            <label lang="de-DE">Versandarten mit Telefonnummer-Pflicht</label>
+            <helpText>Only these shipping methods require a phone number during registration and checkout.</helpText>
+            <helpText lang="de-DE">Nur diese Versandarten erfordern eine Telefonnummer bei Registrierung und Checkout.</helpText>
+            <placeholder>Select shipping methods</placeholder>
+            <placeholder lang="de-DE">Versandarten auswählen</placeholder>
+            <entity>shipping_method</entity>
+            <labelProperty>name</labelProperty>
+        </component>
+    </card>
+</config>
