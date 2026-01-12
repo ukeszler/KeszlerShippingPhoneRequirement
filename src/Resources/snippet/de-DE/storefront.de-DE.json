@@ -1,6 +1,10 @@
 {
     "checkout": {
         "phoneNumberRequiredForShippingMethod": "Eine Telefonnummer ist für die ausgewählte Versandart erforderlich.",
-        "addressSaveChange": "Telefonnummer speichern"
+        "phoneNumberInvalidForShippingMethod": "Die Telefonnummer muss mindestens eine Ziffer enthalten.",
+        "phoneNumberSave": "Telefonnummer speichern"
+    },
+    "error": {
+        "VIOLATION::PHONE_NUMBER_INVALID_ERROR": "Bitte geben Sie mindestens eine Ziffer in der Telefonnummer an."
     }
 }
