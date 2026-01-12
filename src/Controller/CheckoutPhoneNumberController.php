@@ -15,6 +15,7 @@ use Shopware\Storefront\Framework\Routing\StorefrontRouteScope;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use KeszlerShippingPhoneRequirement\Service\PhoneNumberValidator;
 
 #[Route(defaults: [PlatformRequest::ATTRIBUTE_ROUTE_SCOPE => [StorefrontRouteScope::ID]])]
 class CheckoutPhoneNumberController extends StorefrontController
@@ -22,7 +23,10 @@ class CheckoutPhoneNumberController extends StorefrontController
     /**
      * @param EntityRepository<CustomerAddressEntity> $addressRepository
      */
-    public function __construct(private readonly EntityRepository $addressRepository)
+    public function __construct(
+        private readonly EntityRepository $addressRepository,
+        private readonly PhoneNumberValidator $phoneNumberValidator
+    )
     {
     }
 
@@ -39,6 +43,12 @@ class CheckoutPhoneNumberController extends StorefrontController
 
         if ($phoneNumber === '') {
             $this->addFlash(self::DANGER, $this->trans('checkout.phoneNumberRequiredForShippingMethod'));
+
+            return $this->redirectToRoute('frontend.checkout.confirm.page');
+        }
+
+        if (!$this->phoneNumberValidator->hasDigits($phoneNumber)) {
+            $this->addFlash(self::DANGER, $this->trans('checkout.phoneNumberInvalidForShippingMethod'));
 
             return $this->redirectToRoute('frontend.checkout.confirm.page');
         }

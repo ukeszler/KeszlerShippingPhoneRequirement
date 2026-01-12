@@ -2,6 +2,7 @@
 
 namespace KeszlerShippingPhoneRequirement\Checkout\Cart;
 
+use KeszlerShippingPhoneRequirement\Service\PhoneNumberValidator;
 use KeszlerShippingPhoneRequirement\Service\ShippingMethodPhoneRequirement;
 use Shopware\Core\Checkout\Cart\Cart;
 use Shopware\Core\Checkout\Cart\CartValidatorInterface;
@@ -12,7 +13,10 @@ use Shopware\Core\System\SalesChannel\SalesChannelContext;
 
 class PhoneNumberRequiredCartValidator implements CartValidatorInterface
 {
-    public function __construct(private readonly ShippingMethodPhoneRequirement $phoneRequirement)
+    public function __construct(
+        private readonly ShippingMethodPhoneRequirement $phoneRequirement,
+        private readonly PhoneNumberValidator $phoneNumberValidator
+    )
     {
     }
 
@@ -28,11 +32,14 @@ class PhoneNumberRequiredCartValidator implements CartValidatorInterface
         }
 
         $phoneNumber = $this->getPhoneNumber($customer);
-        if ($phoneNumber !== null && trim($phoneNumber) !== '') {
+        if ($phoneNumber === null || trim($phoneNumber) === '') {
+            $errors->add(new PhoneNumberRequiredError());
             return;
         }
 
-        $errors->add(new PhoneNumberRequiredError());
+        if (!$this->phoneNumberValidator->hasDigits($phoneNumber)) {
+            $errors->add(new PhoneNumberInvalidError());
+        }
     }
 
     private function getPhoneNumber(CustomerEntity $customer): ?string

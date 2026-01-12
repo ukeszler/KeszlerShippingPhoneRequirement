@@ -5,25 +5,32 @@
 
     {% set requiredShippingMethodIds = config('KeszlerShippingPhoneRequirement.config.shippingMethodsRequiringPhoneNumber') ?? [] %}
     {% set phoneRequired = requiredShippingMethodIds is iterable and context.shippingMethod is defined and context.shippingMethod.id in requiredShippingMethodIds %}
-    {% set phoneMissing = phoneRequired and (shippingAddress.phoneNumber is empty) %}
+    {% set phoneNumber = shippingAddress.phoneNumber ?? '' %}
+    {% set phoneHasDigit = phoneNumber matches '/\\d/' %}
+    {% set phoneMissing = phoneRequired and (phoneNumber is empty) %}
+    {% set phoneInvalid = phoneRequired and (not phoneMissing) and (not phoneHasDigit) %}
 
-    {% if phoneMissing %}
+    {% if phoneMissing or phoneInvalid %}
         <div class="mt-3">
             <p class="text-danger mb-2">
-                {{ 'checkout.phoneNumberRequiredForShippingMethod'|trans|sw_sanitize }}
+                {% if phoneInvalid %}
+                    {{ 'checkout.phoneNumberInvalidForShippingMethod'|trans|sw_sanitize }}
+                {% else %}
+                    {{ 'checkout.phoneNumberRequiredForShippingMethod'|trans|sw_sanitize }}
+                {% endif %}
             </p>
             <form action="{{ path('frontend.checkout.phone-number.update') }}" method="post">
                 {% sw_include '@Storefront/storefront/component/form/form-input.html.twig' with {
                     label: 'address.phoneNumberLabel'|trans|sw_sanitize,
                     id: 'checkoutPhoneNumberRequired',
                     name: 'phoneNumber',
-                    value: shippingAddress.phoneNumber,
+                    value: phoneNumber,
                     validationRules: 'required',
                     additionalClass: 'mb-2',
                 } %}
 
                 <button type="submit" class="btn btn-primary btn-sm">
-                    {{ 'checkout.addressSaveChange'|trans|sw_sanitize }}
+                    {{ 'checkout.phoneNumberSave'|trans|sw_sanitize }}
                 </button>
             </form>
         </div>

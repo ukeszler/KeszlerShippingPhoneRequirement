@@ -6,6 +6,7 @@
 
     <services>
         <service id="KeszlerShippingPhoneRequirement\Service\ShippingMethodPhoneRequirement" autowire="true" />
+        <service id="KeszlerShippingPhoneRequirement\Service\PhoneNumberValidator" autowire="true" />
 
         <service id="KeszlerShippingPhoneRequirement\SalesChannel\RegisterRouteDecorator"
                  decorates="Shopware\Core\Checkout\Customer\SalesChannel\RegisterRoute"
@@ -20,6 +21,7 @@
 
         <service id="KeszlerShippingPhoneRequirement\Controller\CheckoutPhoneNumberController" public="true">
             <argument type="service" id="customer_address.repository" />
+            <argument type="service" id="KeszlerShippingPhoneRequirement\Service\PhoneNumberValidator" />
             <tag name="controller.service_arguments"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
