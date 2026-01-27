@@ -4,6 +4,10 @@
         "phoneNumberInvalidForShippingMethod": "The phone number must contain at least one digit.",
         "phoneNumberSave": "Save phone number"
     },
+    "keszlerShippingPhoneRequirement": {
+        "phoneNumberLabelPhone": "Telephone number",
+        "phoneNumberLabelMobile": "Mobile number"
+    },
     "error": {
         "VIOLATION::PHONE_NUMBER_INVALID_ERROR": "Please enter at least one digit in the phone number."
     }

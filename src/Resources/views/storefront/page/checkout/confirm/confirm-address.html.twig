@@ -9,6 +9,10 @@
     {% set phoneHasDigit = phoneNumber matches '/\\d/' %}
     {% set phoneMissing = phoneRequired and (phoneNumber is empty) %}
     {% set phoneInvalid = phoneRequired and (not phoneMissing) and (not phoneHasDigit) %}
+    {% set labelSnippet = config('KeszlerShippingPhoneRequirement.config.phoneNumberLabelSnippet') %}
+    {% if labelSnippet is not string or labelSnippet is empty %}
+        {% set labelSnippet = 'keszlerShippingPhoneRequirement.phoneNumberLabelPhone' %}
+    {% endif %}
 
     {% if phoneMissing or phoneInvalid %}
         <div class="mt-3">
@@ -21,7 +25,7 @@
             </p>
             <form action="{{ path('frontend.checkout.phone-number.update') }}" method="post">
                 {% sw_include '@Storefront/storefront/component/form/form-input.html.twig' with {
-                    label: 'address.phoneNumberLabel'|trans|sw_sanitize,
+                    label: labelSnippet|trans|sw_sanitize,
                     id: 'checkoutPhoneNumberRequired',
                     name: 'phoneNumber',
                     value: phoneNumber,

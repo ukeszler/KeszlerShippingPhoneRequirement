@@ -21,8 +21,13 @@
         {% set phoneRequired = true %}
     {% endif %}
 
+    {% set labelSnippet = config('KeszlerShippingPhoneRequirement.config.phoneNumberLabelSnippet') %}
+    {% if labelSnippet is not string or labelSnippet is empty %}
+        {% set labelSnippet = 'keszlerShippingPhoneRequirement.phoneNumberLabelPhone' %}
+    {% endif %}
+
     {% sw_include '@Storefront/storefront/component/form/form-input.html.twig' with {
-        label: 'address.phoneNumberLabel'|trans|sw_sanitize,
+        label: labelSnippet|trans|sw_sanitize,
         id: idPrefix ~ prefix ~ 'AddressPhoneNumber',
         name: prefix ~ '[phoneNumber]',
         value: data.get('phoneNumber'),

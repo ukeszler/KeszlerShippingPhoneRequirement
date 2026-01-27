@@ -4,6 +4,10 @@
         "phoneNumberInvalidForShippingMethod": "Die Telefonnummer muss mindestens eine Ziffer enthalten.",
         "phoneNumberSave": "Telefonnummer speichern"
     },
+    "keszlerShippingPhoneRequirement": {
+        "phoneNumberLabelPhone": "Telefonnummer",
+        "phoneNumberLabelMobile": "Handynummer"
+    },
     "error": {
         "VIOLATION::PHONE_NUMBER_INVALID_ERROR": "Bitte geben Sie mindestens eine Ziffer in der Telefonnummer an."
     }

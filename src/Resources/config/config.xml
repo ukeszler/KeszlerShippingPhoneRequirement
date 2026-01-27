@@ -17,5 +17,26 @@
             <entity>shipping_method</entity>
             <labelProperty>name</labelProperty>
         </component>
+
+        <input-field type="single-select">
+            <name>phoneNumberLabelSnippet</name>
+            <label>Phone number label</label>
+            <label lang="de-DE">Bezeichnung des Telefonnummer-Feldes</label>
+            <helpText>Select which label should be shown for the phone number field.</helpText>
+            <helpText lang="de-DE">Wählen Sie, welche Bezeichnung für das Telefonnummer-Feld angezeigt werden soll.</helpText>
+            <defaultValue>keszlerShippingPhoneRequirement.phoneNumberLabelPhone</defaultValue>
+            <options>
+                <option>
+                    <id>keszlerShippingPhoneRequirement.phoneNumberLabelPhone</id>
+                    <name>Telephone number</name>
+                    <name lang="de-DE">Telefonnummer</name>
+                </option>
+                <option>
+                    <id>keszlerShippingPhoneRequirement.phoneNumberLabelMobile</id>
+                    <name>Mobile number</name>
+                    <name lang="de-DE">Handynummer</name>
+                </option>
+            </options>
+        </input-field>
     </card>
 </config>
