@@ -1,7 +1,7 @@
 {
     "checkout": {
-        "phoneNumberRequiredForShippingMethod": "Eine Telefonnummer ist für die ausgewählte Versandart erforderlich.",
-        "phoneNumberInvalidForShippingMethod": "Die Telefonnummer muss mindestens eine Ziffer enthalten.",
+        "phoneNumberRequiredForShippingMethod": "Eine %label% ist für die ausgewählte Versandart erforderlich.",
+        "phoneNumberInvalidForShippingMethod": "Die %label% muss mindestens eine Ziffer enthalten.",
         "phoneNumberSave": "Telefonnummer speichern"
     },
     "keszlerShippingPhoneRequirement": {
@@ -9,6 +9,8 @@
         "phoneNumberLabelMobile": "Handynummer"
     },
     "error": {
+        "phoneNumberRequiredForShippingMethod": "Eine %label% ist für die ausgewählte Versandart erforderlich.",
+        "phoneNumberInvalidForShippingMethod": "Die %label% muss mindestens eine Ziffer enthalten.",
         "VIOLATION::PHONE_NUMBER_INVALID_ERROR": "Bitte geben Sie mindestens eine Ziffer in der Telefonnummer an."
     }
 }

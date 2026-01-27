@@ -1,7 +1,7 @@
 {
     "checkout": {
-        "phoneNumberRequiredForShippingMethod": "A phone number is required for the selected shipping method.",
-        "phoneNumberInvalidForShippingMethod": "The phone number must contain at least one digit.",
+        "phoneNumberRequiredForShippingMethod": "A %label% is required for the selected shipping method.",
+        "phoneNumberInvalidForShippingMethod": "The %label% must contain at least one digit.",
         "phoneNumberSave": "Save phone number"
     },
     "keszlerShippingPhoneRequirement": {
@@ -9,6 +9,8 @@
         "phoneNumberLabelMobile": "Mobile number"
     },
     "error": {
+        "phoneNumberRequiredForShippingMethod": "A %label% is required for the selected shipping method.",
+        "phoneNumberInvalidForShippingMethod": "The %label% must contain at least one digit.",
         "VIOLATION::PHONE_NUMBER_INVALID_ERROR": "Please enter at least one digit in the phone number."
     }
 }

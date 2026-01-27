@@ -1,0 +1,24 @@
+{% sw_extends '@Storefront/storefront/component/checkout/cart-alerts.html.twig' %}
+
+{% block component_checkout_cart_alerts_errors %}
+    {% set labelSnippet = config('KeszlerShippingPhoneRequirement.config.phoneNumberLabelSnippet') %}
+    {% if labelSnippet is not string or labelSnippet is empty %}
+        {% set labelSnippet = 'keszlerShippingPhoneRequirement.phoneNumberLabelPhone' %}
+    {% endif %}
+    {% set labelText = labelSnippet|trans|sw_sanitize %}
+
+    {% for error in page.cart.errors.errors %}
+        {% set snippetName = "error.#{error.messageKey}" %}
+        {% set params = {'%name%': error.name} %}
+
+        {% if error.messageKey in ['phoneNumberRequiredForShippingMethod', 'phoneNumberInvalidForShippingMethod'] %}
+            {% set params = params|merge({'label': labelText}) %}
+        {% endif %}
+
+        {% sw_include '@Storefront/storefront/utilities/alert.html.twig' with {
+            type: 'danger',
+            content: snippetName|trans(params)|sw_sanitize
+        } %}
+    {% endfor %}
+{% endblock %}
+

@@ -8,7 +8,7 @@ class PhoneNumberInvalidError extends Error
 {
     private const ERROR_ID = 'keszler-shipping-phone-invalid';
 
-    public function __construct()
+    public function __construct(private readonly string $label)
     {
         parent::__construct('Phone number must contain at least one digit.');
     }
@@ -38,6 +38,8 @@ class PhoneNumberInvalidError extends Error
      */
     public function getParameters(): array
     {
-        return [];
+        return [
+            'label' => $this->label,
+        ];
     }
 }

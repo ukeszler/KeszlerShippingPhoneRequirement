@@ -16,12 +16,17 @@
         </service>
 
         <service id="KeszlerShippingPhoneRequirement\Checkout\Cart\PhoneNumberRequiredCartValidator" autowire="true">
+            <argument type="service" id="KeszlerShippingPhoneRequirement\Service\ShippingMethodPhoneRequirement" />
+            <argument type="service" id="KeszlerShippingPhoneRequirement\Service\PhoneNumberValidator" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument type="service" id="Shopware\Core\Framework\Adapter\Translation\Translator" />
             <tag name="shopware.cart.validator" />
         </service>
 
         <service id="KeszlerShippingPhoneRequirement\Controller\CheckoutPhoneNumberController" public="true">
             <argument type="service" id="customer_address.repository" />
             <argument type="service" id="KeszlerShippingPhoneRequirement\Service\PhoneNumberValidator" />
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
             <tag name="controller.service_arguments"/>
             <call method="setContainer">
                 <argument type="service" id="service_container" />
