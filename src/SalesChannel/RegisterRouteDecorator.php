@@ -11,6 +11,7 @@ use Shopware\Core\Framework\Validation\DataBag\RequestDataBag;
 use Shopware\Core\Framework\Validation\DataValidationDefinition;
 use Shopware\Core\Framework\Validation\DataValidator;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
@@ -20,7 +21,8 @@ class RegisterRouteDecorator extends AbstractRegisterRoute
         private readonly AbstractRegisterRoute $decorated,
         private readonly ShippingMethodPhoneRequirement $phoneRequirement,
         private readonly DataValidator $validator,
-        private readonly PhoneNumberValidator $phoneNumberValidator
+        private readonly PhoneNumberValidator $phoneNumberValidator,
+        private readonly RequestStack $requestStack
     ) {
     }
 
@@ -42,6 +44,10 @@ class RegisterRouteDecorator extends AbstractRegisterRoute
 
     private function validatePhoneNumber(RequestDataBag $data, SalesChannelContext $context): void
     {
+        if ($this->isPayPalExpressPrepareCheckoutRequest()) {
+            return;
+        }
+
         if (!$this->phoneRequirement->isPhoneRequiredForContext($context)) {
             return;
         }
@@ -93,5 +99,18 @@ class RegisterRouteDecorator extends AbstractRegisterRoute
         $phoneNumber = $address->get('phoneNumber');
 
         return is_string($phoneNumber) && $this->phoneNumberValidator->hasDigits($phoneNumber);
+    }
+
+    private function isPayPalExpressPrepareCheckoutRequest(): bool
+    {
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request === null) {
+            return false;
+        }
+
+        return \in_array($request->attributes->get('_route'), [
+            'frontend.paypal.express.prepare_checkout',
+            'store-api.paypal.express.prepare_checkout',
+        ], true);
     }
 }
